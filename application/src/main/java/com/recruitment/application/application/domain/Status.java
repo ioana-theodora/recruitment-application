@@ -2,8 +2,10 @@ package com.recruitment.application.application.domain;
 
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Parameter;
+import org.hibernate.validator.constraints.NotEmpty;
 
 import javax.persistence.*;
+import javax.validation.constraints.Size;
 
 @Entity
 @Table(name = "CAN_STATUS")
@@ -21,8 +23,13 @@ public class Status {
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "status_seq")
     @Column(name = "ID", nullable = false, unique = true)
     private Long resourceId;
-    @Column(name = "STS_NAME", nullable = false)
+    
+    @Column(name = "STS_NAME")
+    @Size(max=256)
+    @NotEmpty
     private String status;
+    
+    public Status() {}
 
     public Long getResourceId() {
         return resourceId;

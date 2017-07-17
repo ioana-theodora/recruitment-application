@@ -1,0 +1,33 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Spring Boot Thymeleaf + Spring Security</title>
+
+    <div th:replace="fragments/header :: header-css"/>
+
+</head>
+<body>
+
+<div th:replace="fragments/header :: header"/>
+
+<div class="container">
+
+    <div class="starter-template">
+    	<h1><a th:href="@{/statusnew}">Add new status</a></h1>
+        <ul th:unless="${items.empty}">
+       		<th:block th:each="item : ${items}">
+       			<li th:text="${item.status}">status</li>
+   			</th:block>
+   		</ul>
+   		<ul th:if="${items.empty}">
+       		<li>no records</li>
+   		</ul>
+    </div>
+
+</div>
+<!-- /.container -->
+
+<div th:replace="fragments/footer :: footer"/>
+
+</body>
+</html>

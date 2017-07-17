@@ -1,6 +1,5 @@
 package com.recruitment.application.application.domain;
 
-
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Parameter;
 import org.hibernate.validator.constraints.NotEmpty;
@@ -9,26 +8,26 @@ import javax.persistence.*;
 import javax.validation.constraints.Size;
 
 @Entity
-@Table(name = "CAN_SKILL")
-public class Skill {
+@Table(name = "CAN_SOCIAL_STATUS")
+public class SocialStatus {
 
     @Id
-    @GenericGenerator(name = "skill_seq",
+    @GenericGenerator(name = "social_status_seq",
             strategy = "org.hibernate.id.enhanced.SequenceStyleGenerator",
             parameters = {
-                    @Parameter(name = "sequence_name", value = "skill_seq"),
+                    @Parameter(name = "sequence_name", value = "social_status_seq"),
                     @Parameter(name = "initial_value", value = "1"),
                     @Parameter(name = "increment_size", value = "1")
             }
     )
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "skill_seq")
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "social_status_seq")
     @Column(name = "ID", nullable = false, unique = true)
     private Long resourceId;
     
-    @Column(name = "SKILL_NAME")
+    @Column(name = "SOS_NAME")
     @Size(max=256)
     @NotEmpty
-    private String skill;
+    private String socialStatus;
 
     public Long getResourceId() {
         return resourceId;
@@ -38,19 +37,18 @@ public class Skill {
         this.resourceId = resourceId;
     }
 
-    public String getSkill() {
-        return skill;
-    }
+	public String getSocialStatus() {
+		return socialStatus;
+	}
 
-    public void setSkill(String skill) {
-        this.skill = skill;
-    }
+	public void setSocialStatus(String socialStatus) {
+		this.socialStatus = socialStatus;
+	}
 
-    @Override
-    public String toString() {
-        return "Skill{" +
-                "resourceId=" + resourceId +
-                ", skill='" + skill + '\'' +
-                '}';
-    }
+	@Override
+	public String toString() {
+		return "Status [resourceId=" + resourceId + ", socialStatus=" + socialStatus + "]";
+	}
+
+   
 }

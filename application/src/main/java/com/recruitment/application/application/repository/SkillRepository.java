@@ -1,11 +1,11 @@
 package com.recruitment.application.application.repository;
 
 
-import com.recruitment.application.application.constants.PathConstants;
-import com.recruitment.application.application.domain.Skill;
 import org.springframework.data.repository.PagingAndSortingRepository;
-import org.springframework.data.rest.core.annotation.RepositoryRestResource;
+import org.springframework.stereotype.Repository;
 
-@RepositoryRestResource(collectionResourceRel = PathConstants.skillPath, path = PathConstants.skillPath)
+import com.recruitment.application.application.domain.Skill;
+
+@Repository
 public interface SkillRepository extends PagingAndSortingRepository<Skill, Long> {
 }

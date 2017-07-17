@@ -1,0 +1,10 @@
+create sequence social_status_seq;
+create sequence status_seq;
+create sequence skill_seq;
+create sequence job_seq;
+create sequence cv_seq;
+create sequence dev_seq;
+create sequence cont_seq;
+create sequence position_seq;
+create sequence add_seq;
+create sequence cand_seq;

@@ -13,47 +13,46 @@ import org.hibernate.annotations.Parameter;
 import org.hibernate.validator.constraints.NotEmpty;
 
 @Entity
-@Table(name = "CAN_JOB")
-public class Job {
+@Table(name = "CAN_DEV")
+public class Developer {
 
     @Id
-    @GenericGenerator(name = "job_seq",
+    @GenericGenerator(name = "dev_seq",
             strategy = "org.hibernate.id.enhanced.SequenceStyleGenerator",
             parameters = {
-                    @Parameter(name = "sequence_name", value = "job_seq"),
+                    @Parameter(name = "sequence_name", value = "dev_seq"),
                     @Parameter(name = "initial_value", value = "1"),
                     @Parameter(name = "increment_size", value = "1")
             }
     )
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "job_seq")
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "dev_seq")
     @Column(name = "ID", nullable = false, unique = true)
     private Long resourceId;
     
-    @Column(name = "JOB_NAME")
+    @Column(name = "DEV_RANK")
     @Size(max=256)
     @NotEmpty
-    private String name;
+    private String rank;
 
-    public Long getResourceId() {
-        return resourceId;
-    }
-
-    public void setResourceId(Long resourceId) {
-        this.resourceId = resourceId;
-    }
-
-	public String getName() {
-		return name;
+	public Long getResourceId() {
+		return resourceId;
 	}
 
-	public void setName(String name) {
-		this.name = name;
+	public void setResourceId(Long resourceId) {
+		this.resourceId = resourceId;
+	}
+
+	public String getRank() {
+		return rank;
+	}
+
+	public void setRank(String rank) {
+		this.rank = rank;
 	}
 
 	@Override
 	public String toString() {
-		return "Job [resourceId=" + resourceId + ", name=" + name + "]";
+		return "Developer [resourceId=" + resourceId + ", rank=" + rank + "]";
 	}
 
-  
 }

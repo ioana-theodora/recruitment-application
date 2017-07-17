@@ -1,0 +1,36 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Spring Boot Thymeleaf + Spring Security</title>
+
+    <div th:replace="fragments/header :: header-css"/>
+
+</head>
+<body>
+
+<div th:replace="fragments/header :: header"/>
+
+<div class="container">
+
+    <div class="starter-template">
+        <h1>New status</h1>
+    	<form action="#" th:action="@{/status}" th:object="${status}" method="post">
+    		<table>
+    			<tr>
+					<td>Status:</td>
+					<td><input type="text" th:field="*{status}" /></td>
+					<td th:if="${#fields.hasErrors('status')}" th:errors="${status}">Title error message</td>
+				</tr>
+				<tr>
+					<td><button type="submit">Submit post</button></td>
+				</tr>
+			</table>
+       	</form>
+    </div>
+</div>
+<!-- /.container -->
+
+<div th:replace="fragments/footer :: footer"/>
+
+</body>
+</html>
