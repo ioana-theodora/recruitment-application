@@ -1,7 +1,7 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Spring Boot Thymeleaf + Spring Security</title>
+    <title>New status</title>
 
     <div th:replace="fragments/header :: header-css"/>
 
@@ -18,8 +18,8 @@
     		<table>
     			<tr>
 					<td>Status:</td>
-					<td><input type="text" th:field="*{status}" /></td>
-					<td th:if="${#fields.hasErrors('status')}" th:errors="${status}">Title error message</td>
+					<td><input type="text" th:field="*{name}" /></td>
+					<td th:if="${#fields.hasErrors('name')}" th:errors="*{name}">Title error message</td>
 				</tr>
 				<tr>
 					<td><button type="submit">Submit post</button></td>

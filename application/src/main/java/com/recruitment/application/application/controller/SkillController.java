@@ -1,60 +1,61 @@
 package com.recruitment.application.application.controller;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 
-import com.recruitment.application.application.domain.Status;
-import com.recruitment.application.application.repository.StatusRepository;
+import com.recruitment.application.application.domain.Skill;
+import com.recruitment.application.application.repository.SkillRepository;
 
 @Controller
-public class StatusController {
+public class SkillController {
 
-	private StatusRepository repository;
+	private SkillRepository repository;
 	
 	@Autowired
-	public StatusController(StatusRepository repository) {
+	public SkillController(SkillRepository repository) {
 		this.repository = repository;
 	}
 	
-	@GetMapping("/status")
+	@GetMapping("/skill")
 	public String list(Model model) {
 		model.addAttribute("items", repository.findAll());
-		return "status/list";
+		return "skill/list";
 	}
 	
-	@GetMapping("/statusnew")
-	public String createForm(Status status) {
-		return "status/new";
+	@GetMapping("/skillnew")
+	public String createForm(Skill skill) {
+		return "skill/new";
 	}
 	
-	@PostMapping("/status")
-	public String createSubmit(@Validated @ModelAttribute("status") Status status, BindingResult bindingResult) {
+	@PostMapping("/skill")
+	public String createSubmit(@Valid Skill skill, BindingResult bindingResult) {
 		if (bindingResult.hasErrors()) {
-            return "status/new";
+            return "skill/new";
         }
-		repository.save(status);
-		return "redirect:/status";
+		repository.save(skill);
+		return "redirect:/skill";
 	}
 	
-	@GetMapping("/status/{id}")
+	@GetMapping("/skill/{id}")
 	public String itemForm(@PathVariable("id") Long id,Model model) {
 		model.addAttribute("status", repository.findOne(id));
-		return "status/update";
+		return "skill/update";
 	}
 
-	@PutMapping("/status/{id}")
-	public String updateSubmit(@ModelAttribute Status status,Model model) {
-		repository.save(status);
+	@PutMapping("/skill/{id}")
+	public String updateSubmit(@ModelAttribute Skill skill,Model model) {
+		repository.save(skill);
 		model.addAttribute("items", repository.findAll());
-		return "status/list";
+		return "skill/list";
 	}
 	
 

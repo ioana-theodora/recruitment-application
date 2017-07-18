@@ -28,7 +28,7 @@ public class Skill {
     @Column(name = "SKILL_NAME")
     @Size(max=256)
     @NotEmpty
-    private String skill;
+    private String name;
 
     public Long getResourceId() {
         return resourceId;
@@ -38,19 +38,18 @@ public class Skill {
         this.resourceId = resourceId;
     }
 
-    public String getSkill() {
-        return skill;
-    }
+	public String getName() {
+		return name;
+	}
 
-    public void setSkill(String skill) {
-        this.skill = skill;
-    }
+	public void setName(String name) {
+		this.name = name;
+	}
 
-    @Override
-    public String toString() {
-        return "Skill{" +
-                "resourceId=" + resourceId +
-                ", skill='" + skill + '\'' +
-                '}';
-    }
+	@Override
+	public String toString() {
+		return "Skill [resourceId=" + resourceId + ", name=" + name + "]";
+	}
+
+   
 }

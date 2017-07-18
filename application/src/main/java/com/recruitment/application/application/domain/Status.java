@@ -4,14 +4,18 @@ import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Parameter;
 import org.hibernate.validator.constraints.NotEmpty;
 
+import java.io.Serializable;
+
 import javax.persistence.*;
 import javax.validation.constraints.Size;
 
 @Entity
 @Table(name = "CAN_STATUS")
-public class Status {
+public class Status implements Serializable{
 
-    @Id
+	private static final long serialVersionUID = 1L;
+
+	@Id
     @GenericGenerator(name = "status_seq",
             strategy = "org.hibernate.id.enhanced.SequenceStyleGenerator",
             parameters = {
@@ -27,7 +31,7 @@ public class Status {
     @Column(name = "STS_NAME")
     @Size(max=256)
     @NotEmpty
-    private String status;
+    private String name;
     
     public Status() {}
 
@@ -39,19 +43,18 @@ public class Status {
         this.resourceId = resourceId;
     }
 
-    public String getStatus() {
-        return status;
-    }
+	public String getName() {
+		return name;
+	}
 
-    public void setStatus(String status) {
-        this.status = status;
-    }
+	public void setName(String name) {
+		this.name = name;
+	}
 
-    @Override
-    public String toString() {
-        return "Status{" +
-                "resourceId=" + resourceId +
-                ", status='" + status + '\'' +
-                '}';
-    }
+	@Override
+	public String toString() {
+		return "Status [resourceId=" + resourceId + ", name=" + name + "]";
+	}
+
+ 
 }
