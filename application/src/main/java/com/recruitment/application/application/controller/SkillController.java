@@ -1,16 +1,16 @@
 package com.recruitment.application.application.controller;
 
-import javax.validation.Valid;
-
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
 
 import com.recruitment.application.application.domain.Skill;
 import com.recruitment.application.application.repository.SkillRepository;
@@ -27,7 +27,7 @@ public class SkillController {
 	
 	@GetMapping("/skill")
 	public String list(Model model) {
-		model.addAttribute("items", repository.findAll());
+		model.addAttribute("items", repository.findAll(new Sort(Sort.Direction.ASC, "resourceId")));
 		return "skill/list";
 	}
 	
@@ -37,7 +37,7 @@ public class SkillController {
 	}
 	
 	@PostMapping("/skill")
-	public String createSubmit(@Valid Skill skill, BindingResult bindingResult) {
+	public String createSubmit(@Validated @ModelAttribute("skill") Skill skill, BindingResult bindingResult) {
 		if (bindingResult.hasErrors()) {
             return "skill/new";
         }
@@ -47,16 +47,24 @@ public class SkillController {
 	
 	@GetMapping("/skill/{id}")
 	public String itemForm(@PathVariable("id") Long id,Model model) {
-		model.addAttribute("status", repository.findOne(id));
+		model.addAttribute("skill", repository.findOne(id));
 		return "skill/update";
 	}
 
-	@PutMapping("/skill/{id}")
-	public String updateSubmit(@ModelAttribute Skill skill,Model model) {
+	@PostMapping("/skill/{id}")
+	public String updateSubmit(@PathVariable("id") Long id,@ModelAttribute Skill skill,BindingResult bindingResult) {
+		if (bindingResult.hasErrors()) {
+            return "skill/update";
+        }
+		skill.setResourceId(id);
 		repository.save(skill);
-		model.addAttribute("items", repository.findAll());
-		return "skill/list";
+		return "redirect:/skill";
 	}
 	
+	@DeleteMapping("/skill/{id}")
+	public String delete(@PathVariable("id") Long id) {
+		repository.delete(id);
+		return "redirect:/skill";
+	}
 
 }

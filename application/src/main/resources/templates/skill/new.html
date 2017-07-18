@@ -13,11 +13,11 @@
 <div class="container">
 
     <div class="starter-template">
-        <h1>New status</h1>
+        <h1>New skill</h1>
     	<form action="#" th:action="@{/skill}" th:object="${skill}" method="post">
     		<table>
     			<tr>
-					<td>Status:</td>
+					<td>Skill:</td>
 					<td><input type="text" th:field="*{name}" /></td>
 					<td th:if="${#fields.hasErrors('name')}" th:errors="*{name}">Title error message</td>
 				</tr>

@@ -1,7 +1,7 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Skill</title>
+    <title>Status</title>
 
     <div th:replace="fragments/header :: header-css"/>
 
@@ -13,10 +13,18 @@
 <div class="container">
 
     <div class="starter-template">
-    	<h1><a th:href="@{/statusnew}">Add new skill</a></h1>
+    	<h1><a th:href="@{/skillnew}">Add new skill</a></h1>
         <ul th:unless="${items.empty}">
        		<th:block th:each="item : ${items}">
-       			<li th:text="${item.status}">skill</li>
+       			<li>
+       				<table>
+       					<tr>
+       						<td><h5 th:text="${item.name}"></h5></td>
+       						<td><a th:href="@{/skill/} + ${item.resourceId}">Edit</a></td>
+       						<td><a href="#">Delete</a></td>
+       					</tr>
+       				</table>
+       			</li>
    			</th:block>
    		</ul>
    		<ul th:if="${items.empty}">

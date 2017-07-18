@@ -11,43 +11,43 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.recruitment.application.application.domain.Status;
-import com.recruitment.application.application.repository.StatusRepository;
+import com.recruitment.application.application.domain.Skill;
+import com.recruitment.application.application.repository.SkillRepository;
 
 @RestController
-public class StatusRestController {
+public class SkillRestController {
 
-	private StatusRepository repository;
+	private SkillRepository repository;
 	
 	@Autowired
-	public StatusRestController(StatusRepository repository) {
+	public SkillRestController(SkillRepository repository) {
 		this.repository = repository;
 	}
 	
-	@GetMapping("/rest/status")
-	public Page<Status> findAll(Pageable page){
+	@GetMapping("/rest/skill")
+	public Page<Skill> findAll(Pageable page){
 		return repository.findAll(page);
 	}
 	
-	@GetMapping("/rest/status/{id}")
-	public Status findOne(@PathVariable("id") Long id){
+	@GetMapping("/rest/skill/{id}")
+	public Skill findOne(@PathVariable("id") Long id){
 		return repository.findOne(id);
 	}
 	
-	@DeleteMapping("/rest/status/{id}")
+	@DeleteMapping("/rest/skill/{id}")
 	public void deleteOne(@PathVariable("id") Long id){
 		repository.delete(id);
 	}
 	
-	@PostMapping("/rest/status")
-	public void addOne(@Validated @RequestBody Status status){
-		repository.save(status);
+	@PostMapping("/rest/skill")
+	public void addOne(@Validated @RequestBody Skill skill){
+		repository.save(skill);
 	}
 	
-	@PostMapping("/rest/status/{id}")
-	public void updateOne(@PathVariable("id") Long id,@Validated @RequestBody Status status){
-		status.setResourceId(id);
-		repository.save(status);
+	@PostMapping("/rest/skill/{id}")
+	public void updateOne(@PathVariable("id") Long id,@Validated @RequestBody Skill skill){
+		skill.setResourceId(id);
+		repository.save(skill);
 	}
 	
 }
